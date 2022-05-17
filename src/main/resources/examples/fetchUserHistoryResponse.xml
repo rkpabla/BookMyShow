@@ -1,0 +1,32 @@
+<ns2:fetchUserHistoryResponse xmlns:ns2="http://soap.training.mulesoft.com/">
+    <return>
+        <userid>user_1234</userid>
+		<username>Raghuvinder</username>
+        <phoneNumber>9876543210</phoneNumber>
+		<city>Delhi</city>
+        <theatreName>INOX</theatreName>
+        <movieName>RRR</movieName>
+        <showTime>2022-05-05 09:00:00</showTime>
+		<noOfSeats>4</noOfSeats>
+		<price>200</price>
+		<discount>10%</discount>
+		<paymentCardNumber>1111 2222 3333 4444</paymentCardNumber>
+		<totalAmount>720</totalAmount>
+		<date>04/05/2022</date>
+    </return>
+	<return>
+	<userid>user_1234</userid>
+	<username>Raghuvinder</username>
+	<phoneNumber>8427555736</phoneNumber>
+	<city>Delhi</city>
+	<theatreName>Bestech</theatreName>
+	<movieName>KGF</movieName>
+	<showTime>2022-05-05 15:20:00</showTime>
+	<noOfSeats>2</noOfSeats>
+	<price>150</price>
+	<discount>0%</discount>
+	<paymentCardNumber>1111 2222 3333 4444</paymentCardNumber>
+	<totalAmount>300</totalAmount>
+	<date>09/03/2022</date>
+</return>
+</ns2:fetchUserHistoryResponse>

@@ -1,0 +1,17 @@
+<ns2:getETicketResponse xmlns:ns2="http://soap.training.mulesoft.com/">
+    <return>
+        <userId>user_12345</userId>
+		<bookingId>ID_12345</bookingId>
+		<username>Raghuvinder</username>
+		<city>Delhi</city>
+        <theatreName>INOX</theatreName>
+        <movieName>RRR</movieName>
+		<hallNumber>H2</hallNumber>
+        <showTime>2022-05-05 09:00:00</showTime>
+		<seatNumbers>G1,G2,G3,G4</seatNumbers>
+		<price>200</price>
+		<discount>10%</discount>
+		<totalAmount>720</totalAmount>
+		<date>04/05/2022</date>
+    </return>
+</ns2:getETicketResponse>

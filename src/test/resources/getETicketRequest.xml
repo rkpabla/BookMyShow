@@ -1,0 +1,4 @@
+<ns2:getETicket xmlns:ns2="http://soap.training.mulesoft.com/">
+        <userId>user_12345</userId>
+		<bookingId>ID_12345</bookingId>
+</ns2:getETicket>

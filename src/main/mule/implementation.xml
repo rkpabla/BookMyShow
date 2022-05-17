@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="9a70cecc-aed3-4310-aae9-af9b5853f237" >
+		<db:my-sql-connection host="mysql-78577-0.cloudclusters.net" port="14207" user="admin" password="Pny5loAm" database="BookMyShowTickets" />
+	</db:config>
+	<flow name="bookTicket" doc:id="e7394a6b-b1d6-4194-af08-a37cf91ca944" >
+		<ee:transform doc:name="Transform Message" doc:id="a5d89f66-fd26-4c49-8e64-3e2e9034b3af" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+---
+{
+	"BookingConfirmation" : "Your ticket is booked with BookingID : ID_12345. "
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="getETicket" doc:id="9daa2dbf-d272-4831-9044-b4e1960cf687" >
+		<ee:transform doc:name="Transform Message" doc:id="eed453ee-75d4-43eb-920f-2529c4657a74" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<db:select doc:id="3a92d395-7b54-4d95-a3ee-74eedd94ca68" config-ref="Database_Config">
+			<db:sql ><![CDATA[SELECT * FROM BMS.BOOKINGS WHERE BOOKING_ID=:BOOKING_ID AND USERNAME = :USERNAME]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	"BOOKING_ID" : payload."getETicket"."bookingId",
+	"USERNAME" :  payload."getETicket"."userId"
+}]]]></db:input-parameters>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="88e34a09-30aa-47c2-82f4-388aeb38231b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+ns ns0 http://soap.training.mulesoft.com/
+---
+{
+	ns0#getETicketResponse: {
+		(payload map(data, index)->
+		return: {
+			userId: data.USERNAME default "",
+			bookingId: data.BOOKING_ID as String,
+			username: data.USERNAME default "",
+			theatreName: data.THEATRE_NAME default "",
+			movieName: data.MOVIE_NAME default "",
+			hallNumber: data.MOVIE_NO as String default "",
+			showTime: data.THEATRE_NO default "",
+			seatNumbers: data.BOOKED_SEATS as String default "",
+			price: data.PRICE default 0,
+			discount: data.LANGUAGE default "",
+			totalAmount: data.TOTAL_SEATS default 0,
+			date: data.BOOKING_STATUS as String default ""
+		})
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="9f1eca50-9d22-4256-af22-51cb6efa7a51" message="#[payload]"/>
+	</flow>
+	<flow name="fetchUserHistory" doc:id="bd637fbb-2d09-4da9-84b3-f3e4a6361a41" >
+		<ee:transform doc:name="Transform Message" doc:id="88c02f8b-be7e-4024-aa42-49c3154fba8c" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<db:select doc:name="Select" doc:id="939ff269-051c-4706-b85f-441608ef09bf" config-ref="Database_Config">
+			<db:sql ><![CDATA[SELECT * FROM BMS.BOOKINGS WHERE USERNAME = :USERNAME]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	"USERNAME" : payload."fetchUserHistory"."userId"
+}]]]></db:input-parameters>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="0026c64a-27ae-458c-aea3-d062e8e8f021" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+ns ns0 http://soap.training.mulesoft.com/
+---
+{
+	ns0#fetchUserHistoryResponse: {
+		(payload map(data, index)->
+		return: {
+			userId: data.USERNAME default "",
+			bookingId: data.BOOKING_ID as String,
+			username: data.USERNAME default "",
+			theatreName: data.THEATRE_NAME default "",
+			movieName: data.MOVIE_NAME default "",
+			hallNumber: data.MOVIE_NO as String default "",
+			showTime: data.THEATRE_NO default "",
+			seatNumbers: data.BOOKED_SEATS as String default "",
+			price: data.PRICE default 0,
+			discount: data.LANGUAGE default "",
+			totalAmount: data.TOTAL_SEATS default 0,
+			date: data.BOOKING_STATUS as String default ""
+		})
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="95dd661e-2697-47e8-9763-1fc0339f76dc" message="#[payload]"/>
+	</flow>
+</mule>
