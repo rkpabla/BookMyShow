@@ -1,0 +1,3 @@
+<ns2:bookTicketResponse xmlns:ns2="http://soap.training.mulesoft.com/">
+        Your ticket is booked with BookingID : ID_12345. 
+</ns2:bookTicketResponse>

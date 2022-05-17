@@ -1,0 +1,14 @@
+<ns2:bookTicket xmlns:ns2="http://soap.training.mulesoft.com/">
+    <userId>user_12345</userId>
+    <userName>Raghuvinder</userName>
+    <phoneNumber>9876543210</phoneNumber>
+    <city>Delhi</city>
+    <theatreName>INOX</theatreName>
+    <movieName>RRR</movieName>
+    <showTime>2022-05-05 09:00:00</showTime>
+    <noOfSeats>4</noOfSeats>
+    <price>200</price>
+    <discount>10%</discount>
+    <totalAmount>720</totalAmount>
+    <date>04/05/2022</date>
+</ns2:bookTicket>
