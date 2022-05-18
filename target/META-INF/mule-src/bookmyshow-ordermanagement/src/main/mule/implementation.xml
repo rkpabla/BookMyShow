@@ -64,7 +64,6 @@ ns ns0 http://soap.training.mulesoft.com/
 			</ee:message>
 		</ee:transform>
 		<logger level="INFO" doc:name="Logger" doc:id="9f1eca50-9d22-4256-af22-51cb6efa7a51" message="#[payload]"/>
-		<logger level="INFO" doc:name="Logger" doc:id="bd9d4e12-db69-40c3-9cff-05f70fe9d3bb" message="#[payload]"/>
 	</flow>
 	<flow name="fetchUserHistory" doc:id="bd637fbb-2d09-4da9-84b3-f3e4a6361a41" >
 		<ee:transform doc:name="Transform Message" doc:id="88c02f8b-be7e-4024-aa42-49c3154fba8c" >

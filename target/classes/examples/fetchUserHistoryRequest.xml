@@ -1,0 +1,5 @@
+<ns2:fetchUserHistoryRequest xmlns:ns2="http://soap.training.mulesoft.com/">
+    <return>
+        <userId>user_12345</userId>
+    </return>
+</ns2:fetchUserHistoryRequest>

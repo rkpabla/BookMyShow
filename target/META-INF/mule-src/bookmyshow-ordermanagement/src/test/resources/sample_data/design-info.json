@@ -1,0 +1,13 @@
+{
+  "sampleData": {
+    "a5d89f66-fd26-4c49-8e64-3e2e9034b3af": {
+      "payload": "sample_data/bookticket.xml"
+    },
+    "0026c64a-27ae-458c-aea3-d062e8e8f021": {
+      "payload": "sample_data/fetchuserhistoryrequest.xml"
+    },
+    "88c02f8b-be7e-4024-aa42-49c3154fba8c": {
+      "payload": "sample_data/name.xml"
+    }
+  }
+}
